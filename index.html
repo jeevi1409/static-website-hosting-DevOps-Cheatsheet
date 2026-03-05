@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Bebas+Neue&family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">Dev<span>OPS</span> CMD</div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search commands, topics..." oninput="handleSearch(this.value)">
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showSection('home', this)"><span class="dot"></span> Home</button>
+    <button class="nav-btn" onclick="showSection('linux', this)"><span class="dot"></span> Linux</button>
+    <button class="nav-btn" onclick="showSection('networking', this)"><span class="dot"></span> Networking</button>
+    <button class="nav-btn" onclick="showSection('docker', this)"><span class="dot"></span> Docker</button>
+    <button class="nav-btn" onclick="showSection('git', this)"><span class="dot"></span> Git</button>
+    <button class="nav-btn" onclick="showSection('cloud', this)"><span class="dot"></span> Cloud</button>
+    <button class="nav-btn" onclick="showSection('kubernetes', this)"><span class="dot"></span> Kubernetes</button>
+    <button class="nav-btn" onclick="showSection('notes', this)"><span class="dot"></span> My Notes</button>
+    <button class="nav-btn" onclick="showSection('videos', this)"><span class="dot"></span> Videos</button>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div class="hero">
+  <div class="hero-title">
+    <div class="line1">COMMAND</div>
+    <div class="line2">CENTER</div>
+  </div>
+  <p class="hero-sub">Your ultimate reference for Linux commands, DevOps tools, and cloud computing. Click any command to copy instantly.</p>
+  <div class="stats-bar">
+    <div class="stat"><span class="stat-num">200+</span><span class="stat-label">Commands</span></div>
+    <div class="stat"><span class="stat-num">8</span><span class="stat-label">Categories</span></div>
+    <div class="stat"><span class="stat-num">12+</span><span class="stat-label">Video Resources</span></div>
+    <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Cloud Topics</span></div>
+  </div>
+</div>
+
+<main>
+
+<!-- HOME QUICK VIEW -->
+<section id="home" class="section active">
+  <div class="section-header">
+    <div class="section-title">Quick Reference</div>
+    <div class="section-desc">Most used commands across all categories</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(127,255,107,0.12)">🐧</div>
+        <span class="card-title">Linux Essentials</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('ls -la')"><code class="cmd-code">ls -la</code><span class="cmd-desc">List all files with permissions</span></div>
+        <div class="cmd-item" onclick="copyCmd('grep -r "pattern" .')"><code class="cmd-code">grep -r "pattern" .</code><span class="cmd-desc">Recursive search in directory</span></div>
+        <div class="cmd-item" onclick="copyCmd('chmod 755 file.sh')"><code class="cmd-code">chmod 755 file.sh</code><span class="cmd-desc">Set file permissions</span></div>
+        <div class="cmd-item" onclick="copyCmd('df -h')"><code class="cmd-code">df -h</code><span class="cmd-desc">Disk usage in human-readable</span></div>
+        <div class="cmd-item" onclick="copyCmd('ps aux | grep process')"><code class="cmd-code">ps aux | grep process</code><span class="cmd-desc">Find running processes</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(0,212,255,0.12)">🐳</div>
+        <span class="card-title">Docker Quick</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('docker ps -a')"><code class="cmd-code">docker ps -a</code><span class="cmd-desc">List all containers</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker-compose up -d')"><code class="cmd-code">docker-compose up -d</code><span class="cmd-desc">Start services in background</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker logs -f container_name')"><code class="cmd-code">docker logs -f container_name</code><span class="cmd-desc">Follow container logs</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker exec -it container bash')"><code class="cmd-code">docker exec -it container bash</code><span class="cmd-desc">Shell into container</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker system prune -a')"><code class="cmd-code">docker system prune -a</code><span class="cmd-desc">Remove all unused resources</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(191,107,255,0.12)">☁️</div>
+        <span class="card-title">AWS CLI</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('aws s3 ls s3://bucket-name')"><code class="cmd-code">aws s3 ls s3://bucket-name</code><span class="cmd-desc">List S3 bucket contents</span></div>
+        <div class="cmd-item" onclick="copyCmd('aws ec2 describe-instances')"><code class="cmd-code">aws ec2 describe-instances</code><span class="cmd-desc">List EC2 instances</span></div>
+        <div class="cmd-item" onclick="copyCmd('aws sts get-caller-identity')"><code class="cmd-code">aws sts get-caller-identity</code><span class="cmd-desc">Check current AWS identity</span></div>
+        <div class="cmd-item" onclick="copyCmd('aws logs tail /aws/lambda/fn --follow')"><code class="cmd-code">aws logs tail /aws/lambda/fn</code><span class="cmd-desc">Tail CloudWatch logs</span></div>
+        <div class="cmd-item" onclick="copyCmd('aws configure')"><code class="cmd-code">aws configure</code><span class="cmd-desc">Set AWS credentials</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,107,53,0.12)">🔧</div>
+        <span class="card-title">Git Workflow</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('git log --oneline --graph --all')"><code class="cmd-code">git log --oneline --graph --all</code><span class="cmd-desc">Visual branch history</span></div>
+        <div class="cmd-item" onclick="copyCmd('git stash pop')"><code class="cmd-code">git stash pop</code><span class="cmd-desc">Restore latest stash</span></div>
+        <div class="cmd-item" onclick="copyCmd('git reset --hard HEAD~1')"><code class="cmd-code">git reset --hard HEAD~1</code><span class="cmd-desc">Undo last commit</span></div>
+        <div class="cmd-item" onclick="copyCmd('git cherry-pick <commit-hash>')"><code class="cmd-code">git cherry-pick &lt;hash&gt;</code><span class="cmd-desc">Apply specific commit</span></div>
+        <div class="cmd-item" onclick="copyCmd('git rebase -i HEAD~3')"><code class="cmd-code">git rebase -i HEAD~3</code><span class="cmd-desc">Interactive rebase last 3</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LINUX SECTION -->
+<section id="linux" class="section">
+  <div class="section-header">
+    <div class="section-title" style="color:var(--accent3)">Linux Commands</div>
+    <div class="section-desc">System administration, file management, processes & more</div>
+  </div>
+  <div class="cards-grid">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(127,255,107,0.12)">📁</div>
+        <span class="card-title">File System</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('ls -lahR')"><code class="cmd-code">ls -lahR</code><span class="cmd-desc">List all files recursively with sizes</span></div>
+        <div class="cmd-item" onclick="copyCmd('find / -name "*.log" -mtime +30')"><code class="cmd-code">find / -name "*.log" -mtime +30</code><span class="cmd-desc">Find log files older than 30 days</span></div>
+        <div class="cmd-item" onclick="copyCmd('du -sh *')"><code class="cmd-code">du -sh *</code><span class="cmd-desc">Disk usage of each item</span></div>
+        <div class="cmd-item" onclick="copyCmd('tar -czvf archive.tar.gz /folder')"><code class="cmd-code">tar -czvf archive.tar.gz /folder</code><span class="cmd-desc">Create gzipped tar archive</span></div>
+        <div class="cmd-item" onclick="copyCmd('tar -xzvf archive.tar.gz')"><code class="cmd-code">tar -xzvf archive.tar.gz</code><span class="cmd-desc">Extract gzipped tar archive</span></div>
+        <div class="cmd-item" onclick="copyCmd('ln -s /original /link')"><code class="cmd-code">ln -s /original /link</code><span class="cmd-desc">Create symbolic link</span></div>
+        <div class="cmd-item" onclick="copyCmd('rsync -avz src/ user@host:/dest/')"><code class="cmd-code">rsync -avz src/ user@host:/dest/</code><span class="cmd-desc">Sync files to remote host</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(0,212,255,0.12)">⚙️</div>
+        <span class="card-title">Process Management</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('top -b -n 1 | head -20')"><code class="cmd-code">top -b -n 1 | head -20</code><span class="cmd-desc">Snapshot of top processes</span></div>
+        <div class="cmd-item" onclick="copyCmd('htop')"><code class="cmd-code">htop</code><span class="cmd-desc">Interactive process viewer</span></div>
+        <div class="cmd-item" onclick="copyCmd('kill -9 PID')"><code class="cmd-code">kill -9 PID</code><span class="cmd-desc">Force kill a process</span></div>
+        <div class="cmd-item" onclick="copyCmd('pkill -f process_name')"><code class="cmd-code">pkill -f process_name</code><span class="cmd-desc">Kill by name pattern</span></div>
+        <div class="cmd-item" onclick="copyCmd('nohup ./script.sh &')"><code class="cmd-code">nohup ./script.sh &</code><span class="cmd-desc">Run script in background</span></div>
+        <div class="cmd-item" onclick="copyCmd('jobs -l')"><code class="cmd-code">jobs -l</code><span class="cmd-desc">List background jobs</span></div>
+        <div class="cmd-item" onclick="copyCmd('nice -n 10 command')"><code class="cmd-code">nice -n 10 command</code><span class="cmd-desc">Run with lower priority</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,107,53,0.12)">🔑</div>
+        <span class="card-title">Permissions & Users</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('chmod -R 755 /directory')"><code class="cmd-code">chmod -R 755 /directory</code><span class="cmd-desc">Recursive permissions change</span></div>
+        <div class="cmd-item" onclick="copyCmd('chown -R user:group /dir')"><code class="cmd-code">chown -R user:group /dir</code><span class="cmd-desc">Change ownership recursively</span></div>
+        <div class="cmd-item" onclick="copyCmd('useradd -m -s /bin/bash username')"><code class="cmd-code">useradd -m -s /bin/bash user</code><span class="cmd-desc">Create user with home + shell</span></div>
+        <div class="cmd-item" onclick="copyCmd('usermod -aG sudo username')"><code class="cmd-code">usermod -aG sudo username</code><span class="cmd-desc">Add user to sudo group</span></div>
+        <div class="cmd-item" onclick="copyCmd('passwd username')"><code class="cmd-code">passwd username</code><span class="cmd-desc">Set/change user password</span></div>
+        <div class="cmd-item" onclick="copyCmd('visudo')"><code class="cmd-code">visudo</code><span class="cmd-desc">Safely edit sudoers file</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(191,107,255,0.12)">📊</div>
+        <span class="card-title">System Info</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('uname -a')"><code class="cmd-code">uname -a</code><span class="cmd-desc">Full kernel and OS info</span></div>
+        <div class="cmd-item" onclick="copyCmd('lscpu')"><code class="cmd-code">lscpu</code><span class="cmd-desc">CPU architecture info</span></div>
+        <div class="cmd-item" onclick="copyCmd('free -h')"><code class="cmd-code">free -h</code><span class="cmd-desc">Memory usage overview</span></div>
+        <div class="cmd-item" onclick="copyCmd('lsblk')"><code class="cmd-code">lsblk</code><span class="cmd-desc">Block storage devices</span></div>
+        <div class="cmd-item" onclick="copyCmd('systemctl status service')"><code class="cmd-code">systemctl status service</code><span class="cmd-desc">Check service status</span></div>
+        <div class="cmd-item" onclick="copyCmd('journalctl -u service -f')"><code class="cmd-code">journalctl -u service -f</code><span class="cmd-desc">Follow service logs</span></div>
+        <div class="cmd-item" onclick="copyCmd('uptime -p')"><code class="cmd-code">uptime -p</code><span class="cmd-desc">Human-readable uptime</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(0,212,255,0.12)">🔍</div>
+        <span class="card-title">Text Processing</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('grep -rn --include=\"*.py\" \"import\" .')"><code class="cmd-code">grep -rn --include="*.py" "import" .</code><span class="cmd-desc">Search pattern in Python files</span></div>
+        <div class="cmd-item" onclick="copyCmd('awk \'{print $1, $3}\' file.txt')"><code class="cmd-code">awk '{print $1, $3}' file.txt</code><span class="cmd-desc">Print columns 1 and 3</span></div>
+        <div class="cmd-item" onclick="copyCmd('sed -i \'s/old/new/g\' file.txt')"><code class="cmd-code">sed -i 's/old/new/g' file.txt</code><span class="cmd-desc">Replace text in file</span></div>
+        <div class="cmd-item" onclick="copyCmd('sort file.txt | uniq -c | sort -rn')"><code class="cmd-code">sort file.txt | uniq -c | sort -rn</code><span class="cmd-desc">Count unique lines, sorted</span></div>
+        <div class="cmd-item" onclick="copyCmd('cut -d: -f1 /etc/passwd')"><code class="cmd-code">cut -d: -f1 /etc/passwd</code><span class="cmd-desc">Extract usernames from passwd</span></div>
+        <div class="cmd-item" onclick="copyCmd('wc -l file.txt')"><code class="cmd-code">wc -l file.txt</code><span class="cmd-desc">Count lines in file</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(127,255,107,0.12)">🔒</div>
+        <span class="card-title">SSH & Security</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('ssh-keygen -t ed25519 -C \"email@example.com\"')"><code class="cmd-code">ssh-keygen -t ed25519</code><span class="cmd-desc">Generate ED25519 SSH key</span></div>
+        <div class="cmd-item" onclick="copyCmd('ssh-copy-id user@host')"><code class="cmd-code">ssh-copy-id user@host</code><span class="cmd-desc">Copy public key to remote host</span></div>
+        <div class="cmd-item" onclick="copyCmd('ssh -L 8080:localhost:80 user@host')"><code class="cmd-code">ssh -L 8080:localhost:80 user@host</code><span class="cmd-desc">Local port forwarding tunnel</span></div>
+        <div class="cmd-item" onclick="copyCmd('fail2ban-client status sshd')"><code class="cmd-code">fail2ban-client status sshd</code><span class="cmd-desc">Check fail2ban SSH status</span></div>
+        <div class="cmd-item" onclick="copyCmd('openssl genrsa -out key.pem 4096')"><code class="cmd-code">openssl genrsa -out key.pem 4096</code><span class="cmd-desc">Generate RSA private key</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- NETWORKING -->
+<section id="networking" class="section">
+  <div class="section-header">
+    <div class="section-title" style="color:var(--accent)">Networking</div>
+    <div class="section-desc">Network diagnostics, firewall, DNS & monitoring</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(0,212,255,0.12)">🌐</div>
+        <span class="card-title">Diagnostics</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('ping -c 4 google.com')"><code class="cmd-code">ping -c 4 google.com</code><span class="cmd-desc">Send 4 ICMP packets</span></div>
+        <div class="cmd-item" onclick="copyCmd('traceroute google.com')"><code class="cmd-code">traceroute google.com</code><span class="cmd-desc">Trace network path</span></div>
+        <div class="cmd-item" onclick="copyCmd('nmap -sV -p 1-1000 host')"><code class="cmd-code">nmap -sV -p 1-1000 host</code><span class="cmd-desc">Scan ports with version detect</span></div>
+        <div class="cmd-item" onclick="copyCmd('netstat -tulpn')"><code class="cmd-code">netstat -tulpn</code><span class="cmd-desc">Listening ports and processes</span></div>
+        <div class="cmd-item" onclick="copyCmd('ss -tlnp')"><code class="cmd-code">ss -tlnp</code><span class="cmd-desc">Socket statistics (modern)</span></div>
+        <div class="cmd-item" onclick="copyCmd('curl -I https://example.com')"><code class="cmd-code">curl -I https://example.com</code><span class="cmd-desc">Fetch HTTP headers only</span></div>
+        <div class="cmd-item" onclick="copyCmd('dig @8.8.8.8 domain.com ANY')"><code class="cmd-code">dig @8.8.8.8 domain.com ANY</code><span class="cmd-desc">DNS query all records</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,107,53,0.12)">🛡️</div>
+        <span class="card-title">Firewall (UFW / iptables)</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('ufw allow 22/tcp')"><code class="cmd-code">ufw allow 22/tcp</code><span class="cmd-desc">Allow SSH through firewall</span></div>
+        <div class="cmd-item" onclick="copyCmd('ufw allow from 192.168.1.0/24')"><code class="cmd-code">ufw allow from 192.168.1.0/24</code><span class="cmd-desc">Allow entire subnet</span></div>
+        <div class="cmd-item" onclick="copyCmd('ufw status verbose')"><code class="cmd-code">ufw status verbose</code><span class="cmd-desc">Show firewall rules</span></div>
+        <div class="cmd-item" onclick="copyCmd('iptables -L -n -v')"><code class="cmd-code">iptables -L -n -v</code><span class="cmd-desc">List iptables rules verbose</span></div>
+        <div class="cmd-item" onclick="copyCmd('iptables -A INPUT -p tcp --dport 443 -j ACCEPT')"><code class="cmd-code">iptables -A INPUT -p tcp --dport 443 -j ACCEPT</code><span class="cmd-desc">Allow HTTPS traffic</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(191,107,255,0.12)">📡</div>
+        <span class="card-title">HTTP & API Testing</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('curl -X POST https://api.example.com/endpoint -H \"Content-Type: application/json\" -d \'{\"key\":\"value\"}\'')"><code class="cmd-code">curl -X POST url -H "Content-Type: application/json" -d '{}'</code><span class="cmd-desc">POST JSON to API endpoint</span></div>
+        <div class="cmd-item" onclick="copyCmd('wget -r --no-parent https://example.com')"><code class="cmd-code">wget -r --no-parent https://example.com</code><span class="cmd-desc">Recursively download website</span></div>
+        <div class="cmd-item" onclick="copyCmd('tcpdump -i eth0 port 443 -w capture.pcap')"><code class="cmd-code">tcpdump -i eth0 port 443 -w capture.pcap</code><span class="cmd-desc">Capture HTTPS traffic to file</span></div>
+        <div class="cmd-item" onclick="copyCmd('ab -n 1000 -c 50 http://localhost/')"><code class="cmd-code">ab -n 1000 -c 50 http://localhost/</code><span class="cmd-desc">Apache Bench load test</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCKER -->
+<section id="docker" class="section">
+  <div class="section-header">
+    <div class="section-title" style="color:#4fc3f7">Docker & Kubernetes</div>
+    <div class="section-desc">Containerization, orchestration, and deployment commands</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(79,195,247,0.12)">🐳</div>
+        <span class="card-title">Docker Containers</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('docker run -d -p 8080:80 --name myapp nginx')"><code class="cmd-code">docker run -d -p 8080:80 --name myapp nginx</code><span class="cmd-desc">Run nginx container detached</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker stop $(docker ps -q)')"><code class="cmd-code">docker stop $(docker ps -q)</code><span class="cmd-desc">Stop all running containers</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker rm $(docker ps -aq)')"><code class="cmd-code">docker rm $(docker ps -aq)</code><span class="cmd-desc">Remove all containers</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker stats --no-stream')"><code class="cmd-code">docker stats --no-stream</code><span class="cmd-desc">Container resource usage snapshot</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker inspect container_name')"><code class="cmd-code">docker inspect container_name</code><span class="cmd-desc">Detailed container info (JSON)</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker cp file.txt container:/app/')"><code class="cmd-code">docker cp file.txt container:/app/</code><span class="cmd-desc">Copy file into container</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(0,212,255,0.12)">🖼️</div>
+        <span class="card-title">Docker Images</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('docker build -t myapp:v1.0 .')"><code class="cmd-code">docker build -t myapp:v1.0 .</code><span class="cmd-desc">Build image with tag</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker push registry/myapp:v1.0')"><code class="cmd-code">docker push registry/myapp:v1.0</code><span class="cmd-desc">Push to container registry</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker pull ubuntu:22.04')"><code class="cmd-code">docker pull ubuntu:22.04</code><span class="cmd-desc">Pull specific image version</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker image prune -a')"><code class="cmd-code">docker image prune -a</code><span class="cmd-desc">Remove unused images</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker tag myapp:latest myapp:v2.0')"><code class="cmd-code">docker tag myapp:latest myapp:v2.0</code><span class="cmd-desc">Tag an image</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker save -o image.tar myapp:v1')"><code class="cmd-code">docker save -o image.tar myapp:v1</code><span class="cmd-desc">Export image to tar file</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,107,53,0.12)">☸️</div>
+        <span class="card-title">Kubernetes (kubectl)</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('kubectl get pods -n namespace')"><code class="cmd-code">kubectl get pods -n namespace</code><span class="cmd-desc">List pods in namespace</span></div>
+        <div class="cmd-item" onclick="copyCmd('kubectl describe pod pod-name')"><code class="cmd-code">kubectl describe pod pod-name</code><span class="cmd-desc">Detailed pod info</span></div>
+        <div class="cmd-item" onclick="copyCmd('kubectl logs -f pod-name -c container')"><code class="cmd-code">kubectl logs -f pod-name -c container</code><span class="cmd-desc">Stream container logs</span></div>
+        <div class="cmd-item" onclick="copyCmd('kubectl exec -it pod-name -- bash')"><code class="cmd-code">kubectl exec -it pod-name -- bash</code><span class="cmd-desc">Interactive shell in pod</span></div>
+        <div class="cmd-item" onclick="copyCmd('kubectl rollout restart deployment/app')"><code class="cmd-code">kubectl rollout restart deployment/app</code><span class="cmd-desc">Rolling restart deployment</span></div>
+        <div class="cmd-item" onclick="copyCmd('kubectl scale deployment app --replicas=3')"><code class="cmd-code">kubectl scale deployment app --replicas=3</code><span class="cmd-desc">Scale pods to 3 replicas</span></div>
+        <div class="cmd-item" onclick="copyCmd('kubectl apply -f manifest.yaml')"><code class="cmd-code">kubectl apply -f manifest.yaml</code><span class="cmd-desc">Apply YAML manifest</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(191,107,255,0.12)">📦</div>
+        <span class="card-title">Docker Compose</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('docker-compose up -d --build')"><code class="cmd-code">docker-compose up -d --build</code><span class="cmd-desc">Rebuild and start detached</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker-compose down -v')"><code class="cmd-code">docker-compose down -v</code><span class="cmd-desc">Stop and remove volumes</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker-compose logs -f service')"><code class="cmd-code">docker-compose logs -f service</code><span class="cmd-desc">Follow specific service logs</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker-compose ps')"><code class="cmd-code">docker-compose ps</code><span class="cmd-desc">List compose services</span></div>
+        <div class="cmd-item" onclick="copyCmd('docker-compose exec service sh')"><code class="cmd-code">docker-compose exec service sh</code><span class="cmd-desc">Shell into compose service</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GIT SECTION -->
+<section id="git" class="section">
+  <div class="section-header">
+    <div class="section-title" style="color:var(--accent2)">Git & CI/CD</div>
+    <div class="section-desc">Version control, branching strategies & pipelines</div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,107,53,0.12)">🌿</div>
+        <span class="card-title">Branching</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('git checkout -b feature/new-feature')"><code class="cmd-code">git checkout -b feature/new-feature</code><span class="cmd-desc">Create and switch to new branch</span></div>
+        <div class="cmd-item" onclick="copyCmd('git branch -d branch-name')"><code class="cmd-code">git branch -d branch-name</code><span class="cmd-desc">Delete local branch</span></div>
+        <div class="cmd-item" onclick="copyCmd('git push origin --delete branch-name')"><code class="cmd-code">git push origin --delete branch-name</code><span class="cmd-desc">Delete remote branch</span></div>
+        <div class="cmd-item" onclick="copyCmd('git merge --squash feature-branch')"><code class="cmd-code">git merge --squash feature-branch</code><span class="cmd-desc">Squash merge into one commit</span></div>
+        <div class="cmd-item" onclick="copyCmd('git fetch --prune')"><code class="cmd-code">git fetch --prune</code><span class="cmd-desc">Fetch and remove stale remotes</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(0,212,255,0.12)">🔄</div>
+        <span class="card-title">History & Recovery</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('git reflog')"><code class="cmd-code">git reflog</code><span class="cmd-desc">Show full history of HEAD</span></div>
+        <div class="cmd-item" onclick="copyCmd('git bisect start')"><code class="cmd-code">git bisect start</code><span class="cmd-desc">Start binary search for bug</span></div>
+        <div class="cmd-item" onclick="copyCmd('git revert HEAD~2..HEAD')"><code class="cmd-code">git revert HEAD~2..HEAD</code><span class="cmd-desc">Revert last 2 commits</span></div>
+        <div class="cmd-item" onclick="copyCmd('git diff --stat HEAD~1')"><code class="cmd-code">git diff --stat HEAD~1</code><span class="cmd-desc">Changes since last commit</span></div>
+        <div class="cmd-item" onclick="copyCmd('git shortlog -sn --all')"><code class="cmd-code">git shortlog -sn --all</code><span class="cmd-desc">Commit count by author</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,107,53,0.12)">🛠️</div>
+        <span class="card-title">Setup & Config</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('git config --global user.name \"Your Name\"')"><code class="cmd-code">git config --global user.name "Your Name"</code><span class="cmd-desc">Set global username</span></div>
+        <div class="cmd-item" onclick="copyCmd('git config --global user.email "you@example.com"')"><code class="cmd-code">git config --global user.email "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dba2b4ae9bbea3bab6abb7bef5b8b4b6">[email&#160;protected]</a>"</code><span class="cmd-desc">Set global email</span></div>
+        <div class="cmd-item" onclick="copyCmd('git config --global core.editor "code --wait"')"><code class="cmd-code">git config --global core.editor "code --wait"</code><span class="cmd-desc">Set VS Code as default editor</span></div>
+        <div class="cmd-item" onclick="copyCmd('git config --list')"><code class="cmd-code">git config --list</code><span class="cmd-desc">Show all config settings</span></div>
+        <div class="cmd-item" onclick="copyCmd('git init')"><code class="cmd-code">git init</code><span class="cmd-desc">Initialize a new repo</span></div>
+        <div class="cmd-item" onclick="copyCmd('git clone --depth 1 https://github.com/user/repo.git')"><code class="cmd-code">git clone --depth 1 https://github.com/user/repo.git</code><span class="cmd-desc">Shallow clone (latest snapshot only)</span></div>
+        <div class="cmd-item" onclick="copyCmd('git remote set-url origin https://github.com/user/repo.git')"><code class="cmd-code">git remote set-url origin https://...</code><span class="cmd-desc">Change remote URL</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(0,212,255,0.12)">📦</div>
+        <span class="card-title">Staging & Commits</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('git add -p')"><code class="cmd-code">git add -p</code><span class="cmd-desc">Interactively stage hunks</span></div>
+        <div class="cmd-item" onclick="copyCmd('git commit --amend --no-edit')"><code class="cmd-code">git commit --amend --no-edit</code><span class="cmd-desc">Add to last commit without changing message</span></div>
+        <div class="cmd-item" onclick="copyCmd('git commit -m "feat: add login" --allow-empty')"><code class="cmd-code">git commit -m "feat: add login" --allow-empty</code><span class="cmd-desc">Create empty commit (trigger CI)</span></div>
+        <div class="cmd-item" onclick="copyCmd('git diff --cached')"><code class="cmd-code">git diff --cached</code><span class="cmd-desc">Diff of staged changes</span></div>
+        <div class="cmd-item" onclick="copyCmd('git restore --staged file.txt')"><code class="cmd-code">git restore --staged file.txt</code><span class="cmd-desc">Unstage a file</span></div>
+        <div class="cmd-item" onclick="copyCmd('git rm --cached file.txt')"><code class="cmd-code">git rm --cached file.txt</code><span class="cmd-desc">Stop tracking a file (keep locally)</span></div>
+        <div class="cmd-item" onclick="copyCmd('git clean -fd')"><code class="cmd-code">git clean -fd</code><span class="cmd-desc">Remove all untracked files & dirs</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(191,107,255,0.12)">🗂️</div>
+        <span class="card-title">Stashing</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('git stash push -m "wip: login feature"')"><code class="cmd-code">git stash push -m "wip: login feature"</code><span class="cmd-desc">Stash with a descriptive name</span></div>
+        <div class="cmd-item" onclick="copyCmd('git stash list')"><code class="cmd-code">git stash list</code><span class="cmd-desc">List all stashes</span></div>
+        <div class="cmd-item" onclick="copyCmd('git stash show -p stash@{0}')"><code class="cmd-code">git stash show -p stash@{0}</code><span class="cmd-desc">Show diff of a stash</span></div>
+        <div class="cmd-item" onclick="copyCmd('git stash apply stash@{2}')"><code class="cmd-code">git stash apply stash@{2}</code><span class="cmd-desc">Apply specific stash (keep it)</span></div>
+        <div class="cmd-item" onclick="copyCmd('git stash drop stash@{0}')"><code class="cmd-code">git stash drop stash@{0}</code><span class="cmd-desc">Delete a specific stash</span></div>
+        <div class="cmd-item" onclick="copyCmd('git stash branch feature/from-stash stash@{0}')"><code class="cmd-code">git stash branch feature/from-stash stash@{0}</code><span class="cmd-desc">Create branch from stash</span></div>
+        <div class="cmd-item" onclick="copyCmd('git stash clear')"><code class="cmd-code">git stash clear</code><span class="cmd-desc">Delete all stashes</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(127,255,107,0.12)">🏷️</div>
+        <span class="card-title">Tags & Releases</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('git tag v1.0.0')"><code class="cmd-code">git tag v1.0.0</code><span class="cmd-desc">Create a lightweight tag</span></div>
+        <div class="cmd-item" onclick="copyCmd('git tag -a v1.0.0 -m "Release version 1.0.0"')"><code class="cmd-code">git tag -a v1.0.0 -m "Release version 1.0.0"</code><span class="cmd-desc">Create annotated tag with message</span></div>
+        <div class="cmd-item" onclick="copyCmd('git push origin --tags')"><code class="cmd-code">git push origin --tags</code><span class="cmd-desc">Push all tags to remote</span></div>
+        <div class="cmd-item" onclick="copyCmd('git tag -d v1.0.0')"><code class="cmd-code">git tag -d v1.0.0</code><span class="cmd-desc">Delete local tag</span></div>
+        <div class="cmd-item" onclick="copyCmd('git push origin --delete v1.0.0')"><code class="cmd-code">git push origin --delete v1.0.0</code><span class="cmd-desc">Delete remote tag</span></div>
+        <div class="cmd-item" onclick="copyCmd('git describe --tags --abbrev=0')"><code class="cmd-code">git describe --tags --abbrev=0</code><span class="cmd-desc">Show latest tag name</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(0,212,255,0.12)">🔬</div>
+        <span class="card-title">Search & Blame</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('git blame -L 10,20 file.txt')"><code class="cmd-code">git blame -L 10,20 file.txt</code><span class="cmd-desc">Who changed lines 10–20</span></div>
+        <div class="cmd-item" onclick="copyCmd('git log --all --grep="fix: auth"')"><code class="cmd-code">git log --all --grep="fix: auth"</code><span class="cmd-desc">Search commits by message</span></div>
+        <div class="cmd-item" onclick="copyCmd('git log -S "function login" --oneline')"><code class="cmd-code">git log -S "function login" --oneline</code><span class="cmd-desc">Find when code string was added/removed</span></div>
+        <div class="cmd-item" onclick="copyCmd('git log --author="Alice" --oneline')"><code class="cmd-code">git log --author="Alice" --oneline</code><span class="cmd-desc">Commits by a specific author</span></div>
+        <div class="cmd-item" onclick="copyCmd('git log --since="2024-01-01" --until="2024-06-30"')"><code class="cmd-code">git log --since="2024-01-01" --until="2024-06-30"</code><span class="cmd-desc">Commits within a date range</span></div>
+        <div class="cmd-item" onclick="copyCmd('git grep "TODO" $(git rev-list --all)')"><code class="cmd-code">git grep "TODO" $(git rev-list --all)</code><span class="cmd-desc">Search string across all history</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,107,53,0.12)">🔀</div>
+        <span class="card-title">Merge & Rebase</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('git merge --no-ff feature/login')"><code class="cmd-code">git merge --no-ff feature/login</code><span class="cmd-desc">Merge preserving branch history</span></div>
+        <div class="cmd-item" onclick="copyCmd('git rebase main')"><code class="cmd-code">git rebase main</code><span class="cmd-desc">Rebase current branch onto main</span></div>
+        <div class="cmd-item" onclick="copyCmd('git rebase --onto main feature/old feature/new')"><code class="cmd-code">git rebase --onto main feature/old feature/new</code><span class="cmd-desc">Rebase a branch onto another</span></div>
+        <div class="cmd-item" onclick="copyCmd('git mergetool')"><code class="cmd-code">git mergetool</code><span class="cmd-desc">Open merge conflict GUI tool</span></div>
+        <div class="cmd-item" onclick="copyCmd('git rebase --abort')"><code class="cmd-code">git rebase --abort</code><span class="cmd-desc">Cancel in-progress rebase</span></div>
+        <div class="cmd-item" onclick="copyCmd('git merge --abort')"><code class="cmd-code">git merge --abort</code><span class="cmd-desc">Cancel in-progress merge</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(127,255,107,0.12)">🚀</div>
+        <span class="card-title">Terraform & IaC</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('terraform init')"><code class="cmd-code">terraform init</code><span class="cmd-desc">Initialize Terraform config</span></div>
+        <div class="cmd-item" onclick="copyCmd('terraform plan -out=tfplan')"><code class="cmd-code">terraform plan -out=tfplan</code><span class="cmd-desc">Plan and save to file</span></div>
+        <div class="cmd-item" onclick="copyCmd('terraform apply tfplan')"><code class="cmd-code">terraform apply tfplan</code><span class="cmd-desc">Apply saved plan</span></div>
+        <div class="cmd-item" onclick="copyCmd('terraform destroy -target=aws_instance.web')"><code class="cmd-code">terraform destroy -target=aws_instance.web</code><span class="cmd-desc">Destroy specific resource</span></div>
+        <div class="cmd-item" onclick="copyCmd('terraform state list')"><code class="cmd-code">terraform state list</code><span class="cmd-desc">List managed resources</span></div>
+        <div class="cmd-item" onclick="copyCmd('terraform fmt -recursive')"><code class="cmd-code">terraform fmt -recursive</code><span class="cmd-desc">Format all .tf files</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(191,107,255,0.12)">⚡</div>
+        <span class="card-title">CI/CD Patterns</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item" onclick="copyCmd('act -j build')"><code class="cmd-code">act -j build</code><span class="cmd-desc">Run GitHub Actions locally</span></div>
+        <div class="cmd-item" onclick="copyCmd('helm upgrade --install release chart/ -n ns')"><code class="cmd-code">helm upgrade --install release chart/ -n ns</code><span class="cmd-desc">Helm install/upgrade release</span></div>
+        <div class="cmd-item" onclick="copyCmd('ansible-playbook -i inventory site.yml')"><code class="cmd-code">ansible-playbook -i inventory site.yml</code><span class="cmd-desc">Run Ansible playbook</span></div>
+        <div class="cmd-item" onclick="copyCmd('ansible-vault encrypt secrets.yml')"><code class="cmd-code">ansible-vault encrypt secrets.yml</code><span class="cmd-desc">Encrypt secrets file</span></div>
+        <div class="cmd-item" onclick="copyCmd('skaffold dev')"><code class="cmd-code">skaffold dev</code><span class="cmd-desc">Live dev loop with k8s</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOUD SECTION -->
+<section id="cloud" class="section">
+  <div class="section-header">
+    <div class="section-title" style="color:var(--accent4)">Cloud Computing</div>
+    <div class="section-desc">AWS, GCP, Azure concepts and CLI commands</div>
+  </div>
+  <div class="cloud-grid">
+    <div class="cloud-card">
+      <div class="cloud-card-header">
+        <div class="cloud-icon" style="background:rgba(255,153,0,0.12)">🟠</div>
+        <div><div class="cloud-card-title">AWS Core Services</div><div class="cloud-card-sub">Amazon Web Services</div></div>
+        <span class="badge badge-beginner">Beginner</span>
+      </div>
+      <ul class="topic-list">
+        <li>EC2 — Virtual machines (instances, AMIs, auto-scaling)</li>
+        <li>S3 — Object storage (buckets, versioning, lifecycle)</li>
+        <li>RDS — Managed databases (Multi-AZ, read replicas)</li>
+        <li>VPC — Virtual networking (subnets, route tables, NAT)</li>
+        <li>IAM — Identity management (roles, policies, MFA)</li>
+        <li>Lambda — Serverless functions (triggers, layers)</li>
+        <li>CloudFront — CDN and edge distribution</li>
+        <li>Route 53 — DNS, health checks, routing policies</li>
+      </ul>
+    </div>
+    <div class="cloud-card">
+      <div class="cloud-card-header">
+        <div class="cloud-icon" style="background:rgba(0,212,255,0.12)">🔵</div>
+        <div><div class="cloud-card-title">AWS DevOps Tools</div><div class="cloud-card-sub">CI/CD on AWS</div></div>
+        <span class="badge badge-intermediate">Intermediate</span>
+      </div>
+      <ul class="topic-list">
+        <li>CodePipeline — Automated CI/CD workflows</li>
+        <li>CodeBuild — Managed build service</li>
+        <li>CodeDeploy — Automated application deployment</li>
+        <li>ECS / EKS — Container and Kubernetes management</li>
+        <li>ECR — Private container registry</li>
+        <li>CloudFormation — Infrastructure as Code (IaC)</li>
+        <li>Systems Manager — Fleet management, Parameter Store</li>
+        <li>CloudWatch — Monitoring, alarms, dashboards, logs</li>
+      </ul>
+    </div>
+    <div class="cloud-card">
+      <div class="cloud-card-header">
+        <div class="cloud-icon" style="background:rgba(66,133,244,0.12)">🔷</div>
+        <div><div class="cloud-card-title">Google Cloud (GCP)</div><div class="cloud-card-sub">Google Cloud Platform</div></div>
+        <span class="badge badge-intermediate">Intermediate</span>
+      </div>
+      <ul class="topic-list">
+        <li>GCE — Compute Engine virtual machines</li>
+        <li>GCS — Cloud Storage (buckets, access control)</li>
+        <li>GKE — Google Kubernetes Engine</li>
+        <li>Cloud Run — Serverless containers</li>
+        <li>Cloud Functions — Event-driven serverless</li>
+        <li>BigQuery — Serverless data warehouse</li>
+        <li>Cloud Build — CI/CD pipelines</li>
+        <li>VPC Networking — Shared VPC, peering, firewall rules</li>
+      </ul>
+    </div>
+    <div class="cloud-card">
+      <div class="cloud-card-header">
+        <div class="cloud-icon" style="background:rgba(0,137,214,0.12)">🌀</div>
+        <div><div class="cloud-card-title">Microsoft Azure</div><div class="cloud-card-sub">Azure Cloud Platform</div></div>
+        <span class="badge badge-intermediate">Intermediate</span>
+      </div>
+      <ul class="topic-list">
+        <li>Azure VM — Virtual machines and scale sets</li>
+        <li>AKS — Azure Kubernetes Service</li>
+        <li>Azure DevOps — Pipelines, repos, boards</li>
+        <li>Azure Functions — Serverless compute</li>
+        <li>Blob Storage — Object storage service</li>
+        <li>Azure AD — Identity and access management</li>
+        <li>ARM Templates — Infrastructure as code</li>
+        <li>Azure Monitor — Logs, metrics, alerting</li>
+      </ul>
+    </div>
+    <div class="cloud-card">
+      <div class="cloud-card-header">
+        <div class="cloud-icon" style="background:rgba(191,107,255,0.12)">🏗️</div>
+        <div><div class="cloud-card-title">Cloud Architecture</div><div class="cloud-card-sub">Design patterns</div></div>
+        <span class="badge badge-advanced">Advanced</span>
+      </div>
+      <ul class="topic-list">
+        <li>Microservices — Service decomposition patterns</li>
+        <li>Event-Driven — SQS, SNS, Pub/Sub, Kafka</li>
+        <li>CQRS — Command Query Responsibility Segregation</li>
+        <li>Saga Pattern — Distributed transaction management</li>
+        <li>Service Mesh — Istio, Linkerd, Envoy sidecar</li>
+        <li>Multi-Region — Active-active, active-passive HA</li>
+        <li>FinOps — Cloud cost optimization strategies</li>
+        <li>Landing Zones — Enterprise cloud foundations</li>
+      </ul>
+    </div>
+    <div class="cloud-card">
+      <div class="cloud-card-header">
+        <div class="cloud-icon" style="background:rgba(127,255,107,0.12)">🔒</div>
+        <div><div class="cloud-card-title">Cloud Security</div><div class="cloud-card-sub">Security & Compliance</div></div>
+        <span class="badge badge-advanced">Advanced</span>
+      </div>
+      <ul class="topic-list">
+        <li>Zero Trust — Never trust, always verify model</li>
+        <li>CSPM — Cloud Security Posture Management</li>
+        <li>Secrets Management — HashiCorp Vault, AWS Secrets Manager</li>
+        <li>WAF — Web Application Firewall rules</li>
+        <li>DDoS Protection — Shield, Cloudflare rules</li>
+        <li>Encryption — KMS, envelope encryption, TLS</li>
+        <li>SOC2 / ISO27001 — Compliance frameworks</li>
+        <li>SIEM — Security event monitoring</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- AWS CLI Commands in this section -->
+  <div style="margin-top:2.5rem">
+    <div class="section-header">
+      <div class="section-title" style="font-size:1.4rem; color:var(--accent2)">AWS CLI Commands</div>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon" style="background:rgba(255,153,0,0.12)">☁️</div>
+          <span class="card-title">S3 Commands</span>
+        </div>
+        <div class="card-body">
+          <div class="cmd-item" onclick="copyCmd('aws s3 cp file.txt s3://bucket/path/')"><code class="cmd-code">aws s3 cp file.txt s3://bucket/path/</code><span class="cmd-desc">Upload file to S3</span></div>
+          <div class="cmd-item" onclick="copyCmd('aws s3 sync ./local s3://bucket/ --delete')"><code class="cmd-code">aws s3 sync ./local s3://bucket/ --delete</code><span class="cmd-desc">Sync directory to S3</span></div>
+          <div class="cmd-item" onclick="copyCmd('aws s3 presign s3://bucket/file.txt --expires-in 3600')"><code class="cmd-code">aws s3 presign s3://bucket/file.txt --expires-in 3600</code><span class="cmd-desc">Generate presigned URL (1hr)</span></div>
+          <div class="cmd-item" onclick="copyCmd('aws s3 rb s3://bucket-name --force')"><code class="cmd-code">aws s3 rb s3://bucket-name --force</code><span class="cmd-desc">Delete bucket and contents</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon" style="background:rgba(0,212,255,0.12)">💻</div>
+          <span class="card-title">EC2 Commands</span>
+        </div>
+        <div class="card-body">
+          <div class="cmd-item" onclick="copyCmd('aws ec2 start-instances --instance-ids i-xxxxx')"><code class="cmd-code">aws ec2 start-instances --instance-ids i-xxxxx</code><span class="cmd-desc">Start a stopped instance</span></div>
+          <div class="cmd-item" onclick="copyCmd('aws ec2 describe-security-groups --query "SecurityGroups[*].GroupName"')"><code class="cmd-code">aws ec2 describe-security-groups --query "..."</code><span class="cmd-desc">List all security group names</span></div>
+          <div class="cmd-item" onclick="copyCmd('aws ec2 create-snapshot --volume-id vol-xxxxx')"><code class="cmd-code">aws ec2 create-snapshot --volume-id vol-xxxxx</code><span class="cmd-desc">Create EBS volume snapshot</span></div>
+          <div class="cmd-item" onclick="copyCmd('aws ssm start-session --target i-xxxxx')"><code class="cmd-code">aws ssm start-session --target i-xxxxx</code><span class="cmd-desc">SSM session (no SSH key needed)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS SECTION -->
+<section id="videos" class="section">
+  <div class="section-header">
+    <div class="section-title" style="color:var(--accent2)">Learning Resources</div>
+    <div class="section-desc">Curated DevOps, Linux & Cloud video tutorials from YouTube</div>
+  </div>
+  <div class="video-grid">
+
+    <a class="video-link" href="https://www.youtube.com/results?search_query=linux+command+line+full+course" target="_blank">
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg, #1a2a1a, #0d1f0d)">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">🐧</div>
+          <div class="play-btn"><div class="play-icon">▶</div></div>
+        </div>
+        <div class="video-meta">
+          <span class="video-tag tag-linux">Linux</span>
+          <div class="video-title">Linux Command Line Full Course for Beginners</div>
+          <div class="video-channel">🎓 Search on YouTube → freeCodeCamp</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="video-link" href="https://www.youtube.com/results?search_query=devops+full+course+2024" target="_blank">
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg, #0d1a2a, #0a1520)">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">⚙️</div>
+          <div class="play-btn"><div class="play-icon">▶</div></div>
+        </div>
+        <div class="video-meta">
+          <span class="video-tag tag-devops">DevOps</span>
+          <div class="video-title">DevOps Full Course 2024 — Zero to Hero</div>
+          <div class="video-channel">🎓 Search on YouTube → TechWorld with Nana</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="video-link" href="https://www.youtube.com/results?search_query=docker+tutorial+beginners+2024" target="_blank">
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg, #0a1f2a, #071520)">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">🐳</div>
+          <div class="play-btn"><div class="play-icon">▶</div></div>
+        </div>
+        <div class="video-meta">
+          <span class="video-tag tag-docker">Docker</span>
+          <div class="video-title">Docker Tutorial for Beginners — Full Course</div>
+          <div class="video-channel">🎓 Search on YouTube → TechWorld with Nana</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="video-link" href="https://www.youtube.com/results?search_query=kubernetes+tutorial+complete+course" target="_blank">
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg, #2a1a0a, #1f1005)">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">☸️</div>
+          <div class="play-btn"><div class="play-icon">▶</div></div>
+        </div>
+        <div class="video-meta">
+          <span class="video-tag tag-k8s">Kubernetes</span>
+          <div class="video-title">Kubernetes Complete Course — Beginner to Pro</div>
+          <div class="video-channel">🎓 Search on YouTube → TechWorld with Nana</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="video-link" href="https://www.youtube.com/results?search_query=aws+cloud+practitioner+full+course" target="_blank">
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg, #2a1a0a, #201508)">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">☁️</div>
+          <div class="play-btn"><div class="play-icon">▶</div></div>
+        </div>
+        <div class="video-meta">
+          <span class="video-tag tag-cloud">Cloud</span>
+          <div class="video-title">AWS Cloud Practitioner Full Course — Exam Prep</div>
+          <div class="video-channel">🎓 Search on YouTube → freeCodeCamp</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="video-link" href="https://www.youtube.com/results?search_query=terraform+tutorial+beginners+infrastructure+as+code" target="_blank">
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg, #1a0a2a, #130820)">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">🏗️</div>
+          <div class="play-btn"><div class="play-icon">▶</div></div>
+        </div>
+        <div class="video-meta">
+          <span class="video-tag tag-devops">IaC</span>
+          <div class="video-title">Terraform Full Course — Infrastructure as Code</div>
+          <div class="video-channel">🎓 Search on YouTube → freeCodeCamp</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="video-link" href="https://www.youtube.com/results?search_query=linux+shell+scripting+tutorial" target="_blank">
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg, #0a2a1a, #071f12)">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">📜</div>
+          <div class="play-btn"><div class="play-icon">▶</div></div>
+        </div>
+        <div class="video-meta">
+          <span class="video-tag tag-linux">Shell</span>
+          <div class="video-title">Bash Shell Scripting — Complete Tutorial</div>
+          <div class="video-channel">🎓 Search on YouTube → Corey Schafer</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="video-link" href="https://www.youtube.com/results?search_query=git+github+full+course+beginners" target="_blank">
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg, #2a0a0a, #1f0808)">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">🔧</div>
+          <div class="play-btn"><div class="play-icon">▶</div></div>
+        </div>
+        <div class="video-meta">
+          <span class="video-tag tag-devops">Git</span>
+          <div class="video-title">Git & GitHub Full Course for Beginners</div>
+          <div class="video-channel">🎓 Search on YouTube → Traversy Media</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="video-link" href="https://www.youtube.com/results?search_query=google+cloud+gcp+tutorial+complete" target="_blank">
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg, #0a152a, #080f20)">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">🔷</div>
+          <div class="play-btn"><div class="play-icon">▶</div></div>
+        </div>
+        <div class="video-meta">
+          <span class="video-tag tag-cloud">GCP</span>
+          <div class="video-title">Google Cloud Platform — Full Beginner Course</div>
+          <div class="video-channel">🎓 Search on YouTube → Google Cloud Tech</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="video-link" href="https://www.youtube.com/results?search_query=ci+cd+pipeline+tutorial+github+actions" target="_blank">
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg, #1a2a0a, #111f08)">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">🚀</div>
+          <div class="play-btn"><div class="play-icon">▶</div></div>
+        </div>
+        <div class="video-meta">
+          <span class="video-tag tag-devops">CI/CD</span>
+          <div class="video-title">GitHub Actions — Complete CI/CD Pipeline</div>
+          <div class="video-channel">🎓 Search on YouTube → TechWorld with Nana</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="video-link" href="https://www.youtube.com/results?search_query=linux+networking+tutorial+sysadmin" target="_blank">
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg, #0a1f2a, #061520)">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">🌐</div>
+          <div class="play-btn"><div class="play-icon">▶</div></div>
+        </div>
+        <div class="video-meta">
+          <span class="video-tag tag-linux">Networking</span>
+          <div class="video-title">Linux Networking for SysAdmins</div>
+          <div class="video-channel">🎓 Search on YouTube → NetworkChuck</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="video-link" href="https://www.youtube.com/results?search_query=prometheus+grafana+monitoring+tutorial" target="_blank">
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg, #2a0f0a, #1f0a08)">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">📊</div>
+          <div class="play-btn"><div class="play-icon">▶</div></div>
+        </div>
+        <div class="video-meta">
+          <span class="video-tag tag-devops">Monitoring</span>
+          <div class="video-title">Prometheus & Grafana — Full Monitoring Setup</div>
+          <div class="video-channel">🎓 Search on YouTube → TechWorld with Nana</div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- KUBERNETES SECTION -->
+<section id="kubernetes" class="section">
+  <div class="section-header">
+    <div class="section-title" style="color:var(--accent)">Kubernetes Deep Dive</div>
+    <div class="section-desc">Architecture, Pods, Flow — from your handwritten notes</div>
+  </div>
+
+  <!-- Architecture Cards -->
+  <div class="cards-grid" style="margin-bottom:2rem">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(0,212,255,0.12)">🏗️</div>
+        <span class="card-title">What is Kubernetes?</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent4)">Orchestration Tool</code><span class="cmd-desc">Manages containers across multiple machines</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent4)">Auto Scaling</code><span class="cmd-desc">Automatically scales containers on heavy load or crashes</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent4)">Self Healing</code><span class="cmd-desc">Automatically restarts crashed containers</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent4)">Load Distribution</code><span class="cmd-desc">Splits containers across machines equally</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent4)">Server Scaling</code><span class="cmd-desc">Servers increase automatically as demand grows</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,107,53,0.12)">🖥️</div>
+        <span class="card-title">Master Node Components</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent2)">API Server</code><span class="cmd-desc">Every communication is done through API Server — central hub</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent2)">Controller Manager (CM)</code><span class="cmd-desc">Maintains desired state of containers. Checks desired vs actual state</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent2)">ETCD</code><span class="cmd-desc">Database — stores desired state and actual state of all resources</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent2)">Scheduler</code><span class="cmd-desc">Decides which Worker Node a newly created container should run on</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(127,255,107,0.12)">⚙️</div>
+        <span class="card-title">Worker Node Components</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent3)">Kubelet</code><span class="cmd-desc">Watches container state. If container crashes, informs API Server</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent3)">Container Runtime (CRM)</code><span class="cmd-desc">Actually creates and runs containers (e.g. containerd, Docker)</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent3)">Containers</code><span class="cmd-desc">Application containers running inside Pods on Worker Nodes</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent3)">Kube-proxy</code><span class="cmd-desc">Handles networking rules and Pod-to-Pod communication</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(191,107,255,0.12)">🔁</div>
+        <span class="card-title">Pod Concepts</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent4)">Pod</code><span class="cmd-desc">Smallest unit in K8s. Wraps one or more containers with shared storage & network</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent4)">Pod IP</code><span class="cmd-desc">Each Pod gets a unique IP. Pods communicate when they know each other's Pod IP</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent4)">Storage in Pod</code><span class="cmd-desc">Used to persist data beyond container lifecycle</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent4)">Multi-container Pod</code><span class="cmd-desc">Only for tightly coupled applications that must share resources</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent4)">Pod Crash</code><span class="cmd-desc">If container in pod crashes, entire pod is deleted and recreated</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- K8s Flow -->
+  <div class="section-header">
+    <div class="section-title" style="font-size:1.4rem; color:var(--accent)">Kubernetes Self-Healing Flow</div>
+    <div class="section-desc">How K8s recovers from a container crash — step by step</div>
+  </div>
+  <div class="cards-grid" style="margin-bottom:2rem">
+    <div class="flow-card">
+      <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--accent); margin-bottom:1rem">Recovery Flow</div>
+      <div class="flow-step"><div class="flow-num">1</div><div class="flow-text"><strong>Kubelet</strong> watches container state — detects crash</div></div>
+      <div class="flow-step"><div class="flow-num">2</div><div class="flow-text">Kubelet <strong>informs API Server</strong> about the crash</div></div>
+      <div class="flow-step"><div class="flow-num">3</div><div class="flow-text">API Server notifies <strong>Controller Manager</strong> to check state</div></div>
+      <div class="flow-step"><div class="flow-num">4</div><div class="flow-text">API Server queries <strong>ETCD</strong> for desired state vs actual state</div></div>
+      <div class="flow-step"><div class="flow-num">5</div><div class="flow-text"><strong>Controller Manager</strong> compares desired vs actual — finds mismatch</div></div>
+      <div class="flow-step"><div class="flow-num">6</div><div class="flow-text">API Server asks <strong>Scheduler</strong> — which Worker Node should host the new container?</div></div>
+      <div class="flow-step"><div class="flow-num">7</div><div class="flow-text">API Server instructs <strong>Kubelet</strong> on the chosen node to create container</div></div>
+      <div class="flow-step"><div class="flow-num">8</div><div class="flow-text"><strong>CRM (Container Runtime)</strong> creates the container for the image</div></div>
+    </div>
+
+    <div class="flow-card">
+      <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--accent4); margin-bottom:1rem">Create Pod Flow</div>
+      <div class="flow-step"><div class="flow-num" style="border-color:var(--accent4);color:var(--accent4);background:rgba(191,107,255,0.1)">1</div><div class="flow-text">Write a <strong>pod.yml</strong> manifest file with apiVersion, kind, metadata, spec</div></div>
+      <div class="flow-step"><div class="flow-num" style="border-color:var(--accent4);color:var(--accent4);background:rgba(191,107,255,0.1)">2</div><div class="flow-text">Run <strong>kubectl apply -f pod.yml</strong> to send manifest to API Server</div></div>
+      <div class="flow-step"><div class="flow-num" style="border-color:var(--accent4);color:var(--accent4);background:rgba(191,107,255,0.1)">3</div><div class="flow-text">API Server stores desired state in <strong>ETCD</strong></div></div>
+      <div class="flow-step"><div class="flow-num" style="border-color:var(--accent4);color:var(--accent4);background:rgba(191,107,255,0.1)">4</div><div class="flow-text"><strong>Scheduler</strong> decides which node gets the Pod</div></div>
+      <div class="flow-step"><div class="flow-num" style="border-color:var(--accent4);color:var(--accent4);background:rgba(191,107,255,0.1)">5</div><div class="flow-text"><strong>Kubelet</strong> on that node creates the container via CRM</div></div>
+      <div class="flow-step"><div class="flow-num" style="border-color:var(--accent4);color:var(--accent4);background:rgba(191,107,255,0.1)">6</div><div class="flow-text">Use <strong>kubectl get pods</strong> or <strong>kubectl describe pods pod-name</strong> to verify</div></div>
+    </div>
+  </div>
+
+  <!-- Pod YAML -->
+  <div class="section-header">
+    <div class="section-title" style="font-size:1.4rem; color:var(--accent3)">Pod YAML Structure</div>
+  </div>
+  <div class="cards-grid" style="margin-bottom:2rem">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(127,255,107,0.12)">📄</div>
+        <span class="card-title">pod.yml Template</span>
+      </div>
+      <div class="card-body">
+        <div class="yaml-block">
+<span class="yaml-key">apiVersion</span>: <span class="yaml-val">v1</span>          <span class="yaml-comment"># API version</span>
+<span class="yaml-key">kind</span>: <span class="yaml-val">Pod</span>               <span class="yaml-comment"># Type of resource</span>
+<span class="yaml-key">metadata</span>:
+  <span class="yaml-key">name</span>: <span class="yaml-val">pod-name</span>         <span class="yaml-comment"># Name of the pod</span>
+  <span class="yaml-key">labels</span>:
+    <span class="yaml-key">app</span>: <span class="yaml-val">my-app</span>          <span class="yaml-comment"># Info about pods</span>
+<span class="yaml-key">spec</span>:
+  <span class="yaml-key">containers</span>:
+    - <span class="yaml-key">name</span>: <span class="yaml-val">container-name</span>
+      <span class="yaml-key">image</span>: <span class="yaml-val">nginx:latest</span>
+      <span class="yaml-key">ports</span>:
+        - <span class="yaml-key">containerPort</span>: <span class="yaml-val">80</span></div>
+        <div style="margin-top:1rem">
+          <div class="cmd-item" onclick="copyCmd('kubectl apply -f pod.yml')"><code class="cmd-code">kubectl apply -f pod.yml</code><span class="cmd-desc">Create pod from YAML file</span></div>
+          <div class="cmd-item" onclick="copyCmd('kubectl get pods -o wide')"><code class="cmd-code">kubectl get pods -o wide</code><span class="cmd-desc">List pods with node and IP info</span></div>
+          <div class="cmd-item" onclick="copyCmd('kubectl describe pods pod-name')"><code class="cmd-code">kubectl describe pods pod-name</code><span class="cmd-desc">Detailed pod info and events</span></div>
+          <div class="cmd-item" onclick="copyCmd('kubectl delete pod pod-name')"><code class="cmd-code">kubectl delete pod pod-name</code><span class="cmd-desc">Delete a specific pod</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,107,53,0.12)">☸️</div>
+        <span class="card-title">K8s Interview Answers</span>
+      </div>
+      <div class="card-body">
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent)">What is Kubernetes?</code><span class="cmd-desc">An orchestration tool to deploy, manage, scale, and monitor containerized applications automatically</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent)">How do you use K8s?</code><span class="cmd-desc">Write YAML manifest files to define deployments, services, and resources — K8s ensures desired state is maintained</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent)">GUI or YAML in real-time?</code><span class="cmd-desc">Dashboard is used for monitoring/troubleshooting. YAML files + kubectl are used for actual deployments</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent)">Networking in K8s</code><span class="cmd-desc">Networking enables communication between Pods, services, and users</span></div>
+        <div class="cmd-item"><code class="cmd-code" style="color:var(--accent)">Why storage in K8s?</code><span class="cmd-desc">Containers are ephemeral — storage is required so data persists beyond container lifecycle</span></div>
+        <div class="oneliner">In real time, Kubernetes is used to deploy, manage, scale, and monitor containerized apps. It exposes apps through services, auto-scales based on traffic, restarts failed Pods, ensures data persistence using volumes, and performs rolling updates with zero downtime.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MY NOTES SECTION -->
+<section id="notes" class="section">
+  <div class="section-header">
+    <div class="section-title" style="color:var(--accent2)">My Notes</div>
+    <div class="section-desc">Personal study notes — Git workflow, Docker concepts, AWS vs Azure comparisons</div>
+  </div>
+
+  <!-- Git Interview Q&A -->
+  <div class="section-header" style="margin-top:0">
+    <div class="section-title" style="font-size:1.4rem; color:var(--accent2)">Git & GitHub — Interview Q&A</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;margin-bottom:2rem">
+
+    <div class="interview-card">
+      <div class="interview-q">What is Git?</div>
+      <div class="interview-a">Git is a <strong>distributed version control system</strong> used to track changes in source code and coordinate work among multiple developers.</div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-q">What is GitHub?</div>
+      <div class="interview-a">GitHub is a <strong>cloud-based platform</strong> that hosts Git repositories and provides collaboration features like pull requests, issue tracking, and CI/CD integration.</div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-q">What are Conventional Commit types?</div>
+      <div class="interview-a">
+        <strong>fix:</strong> msg — Fix a bug/error<br>
+        <strong>feat:</strong> msg — Adding a new feature<br>
+        <strong>refactor:</strong> msg — Changing variable names/structure<br>
+        <strong>docs:</strong> msg — Documentation changes<br>
+        <strong>chore:</strong> msg — Changes that don't affect logic<br>
+        <strong>!fix:</strong> msg — Breaking change / makes error
+      </div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-q">What is a Pull Request?</div>
+      <div class="interview-a">A Pull Request is used to push modifications <strong>when you don't have direct access to the main branch</strong>. In the repo's PR tab, maintainers can see and review the request before merging.</div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-q">What is git stash?</div>
+      <div class="interview-a"><strong>git stash</strong> saves your current uncommitted changes temporarily. <strong>git stash pop</strong> restores those files back to the working directory.</div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-q">What is a Merge Conflict?</div>
+      <div class="interview-a">A merge conflict occurs when two branches edit the same lines. Steps to resolve: (1) <strong>git pull</strong> — shows the conflict markers, (2) <strong>resolve manually</strong> and merge the code.</div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-q">What is GitHub Actions?</div>
+      <div class="interview-a">GitHub Actions is a <strong>CI/CD solution focused on GitHub</strong>. It is not multi-platform dependent and automates GitHub workflows using code snippets (YAML workflows).</div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-q">Git Workflow Summary</div>
+      <div class="interview-a">
+        Working Folder → <strong>git add .</strong> → Staging Area<br>
+        → <strong>git commit -m "message"</strong><br>
+        → <strong>git remote add origin (url)</strong><br>
+        → <strong>git branch -M main</strong><br>
+        → <strong>git push origin main</strong>
+      </div>
+      <div class="oneliner">git log — shows all commits in repo. git diff branchname — checks difference between main and that branch.</div>
+    </div>
+  </div>
+
+  <!-- Docker Q&A from notes -->
+  <div class="section-header">
+    <div class="section-title" style="font-size:1.4rem; color:#4fc3f7">Docker — From My Notes</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;margin-bottom:2rem">
+
+    <div class="interview-card">
+      <div class="interview-q">Why do we need Docker?</div>
+      <div class="interview-a">Without Docker, a web application (PHP + MySQL + Apache) runs on one machine. Moving it to another machine means re-installing all software. <strong>Docker packages the app + software into a container</strong> — platform independent.</div>
+      <div class="oneliner">Web App + PHP + MySQL + Code + Software → Container → Platform Independent</div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-q">What is a Docker Image?</div>
+      <div class="interview-a">A Docker Image is a <strong>template/snapshot of an application</strong>. Flow: Software Application → Dockerfile → Image. The image can be stored locally or on DockerHub.</div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-q">Common Docker Commands</div>
+      <div class="interview-a">
+        <div style="margin-bottom:6px"><strong>Image Commands:</strong></div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--accent3);line-height:1.8">
+          docker build -t app-name .<br>
+          docker images<br>
+          docker rmi image_id
+        </div>
+        <div style="margin:8px 0 6px"><strong>Container Commands:</strong></div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--accent3);line-height:1.8">
+          docker run -d -p 8080:80 app-name<br>
+          docker ps / docker ps -a<br>
+          docker stop container_id<br>
+          docker rm container_id<br>
+          docker logs container_id<br>
+          docker exec -it container_id /bin/bash
+        </div>
+      </div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-q">Docker Compose Commands</div>
+      <div class="interview-a">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--accent3);line-height:1.9">
+          docker-compose up<br>
+          docker-compose up -d<br>
+          docker-compose down<br>
+          docker-compose ps<br>
+          docker system prune
+        </div>
+      </div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-q">Where does Docker run?</div>
+      <div class="interview-a">Docker runs on <strong>Linux natively</strong>. On Windows and MacOS it uses <strong>Hyper-V / WSL2</strong> (Hyperkit on Mac) to allow other OS to run within their OS environment.</div>
+    </div>
+  </div>
+
+  <!-- AWS vs Azure Comparison Tables -->
+  <div class="section-header">
+    <div class="section-title" style="font-size:1.4rem; color:var(--accent4)">AWS vs Azure — Comparison Tables</div>
+  </div>
+  <div class="cards-grid" style="margin-bottom:2rem">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,153,0,0.12)">⚖️</div>
+        <span class="card-title">EC2 vs Azure VMs</span>
+      </div>
+      <div class="card-body" style="padding:0">
+        <table class="compare-table">
+          <tr><th>Feature</th><th class="th-aws">AWS EC2</th><th class="th-azure">Azure VM</th></tr>
+          <tr><td>Service Name</td><td>EC2</td><td>Azure Virtual Machines</td></tr>
+          <tr><td>Instance Types</td><td>t, c, r, m</td><td>B, D, E, F</td></tr>
+          <tr><td>Auto Scaling</td><td>Auto Scaling Groups</td><td>VM Scale Sets</td></tr>
+          <tr><td>Load Balancer</td><td>ELB</td><td>Azure Load Balancer</td></tr>
+          <tr><td>OS Support</td><td>Linux / Windows</td><td>Linux / Windows</td></tr>
+          <tr><td>Pricing</td><td>On-Demand, Reserved, Spot</td><td>Pay-as-you-go, Reserved, Spot</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(191,107,255,0.12)">🔑</div>
+        <span class="card-title">AWS IAM vs Azure IAM</span>
+      </div>
+      <div class="card-body" style="padding:0">
+        <table class="compare-table">
+          <tr><th>Feature</th><th class="th-aws">AWS IAM</th><th class="th-azure">Azure IAM</th></tr>
+          <tr><td>Identity Service</td><td>AWS IAM</td><td>Microsoft Entra ID</td></tr>
+          <tr><td>Access Model</td><td>Policy-based</td><td>Role-based (RBAC)</td></tr>
+          <tr><td>Permissions</td><td>JSON Policies</td><td>Role Assignments</td></tr>
+          <tr><td>Temporary Access</td><td>IAM Roles</td><td>Managed Identities</td></tr>
+          <tr><td>MFA Support</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>Scope</td><td>Global</td><td>Tenant-based</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(0,212,255,0.12)">☁️</div>
+        <span class="card-title">Cloud Service Models</span>
+      </div>
+      <div class="card-body" style="padding:0">
+        <table class="compare-table">
+          <tr><th>Model</th><th>Who Manages</th><th class="th-aws">AWS Example</th><th class="th-azure">Azure Example</th></tr>
+          <tr><td>IaaS</td><td>User</td><td>EC2</td><td>Azure VM</td></tr>
+          <tr><td>PaaS</td><td>Cloud Provider</td><td>Elastic Beanstalk</td><td>App Service</td></tr>
+          <tr><td>SaaS</td><td>Cloud Provider</td><td>QuickSight</td><td>Microsoft 365</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(255,107,53,0.12)">🔧</div>
+        <span class="card-title">Azure CLI vs Azure SDK</span>
+      </div>
+      <div class="card-body" style="padding:0">
+        <table class="compare-table">
+          <tr><th>Feature</th><th class="th-azure">Azure CLI</th><th class="th-azure">Azure SDK</th></tr>
+          <tr><td>Interface</td><td>Command line</td><td>Programming libraries</td></tr>
+          <tr><td>Used by</td><td>Admins, DevOps</td><td>Developers</td></tr>
+          <tr><td>Languages</td><td>CLI commands</td><td>Python, Java, .NET, JS</td></tr>
+          <tr><td>Automation</td><td>Shell scripts</td><td>Application logic</td></tr>
+          <tr><td>Learning Curve</td><td>Easy</td><td>Moderate</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="grid-column:span 2">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(0,212,255,0.12)">📊</div>
+        <span class="card-title">AWS vs Azure — Most Used Services</span>
+      </div>
+      <div class="card-body" style="padding:0">
+        <table class="compare-table">
+          <tr><th>Category</th><th class="th-aws">AWS</th><th class="th-azure">Azure</th><th>Purpose</th></tr>
+          <tr><td>Compute (VMs)</td><td>EC2</td><td>Virtual Machines</td><td>Run apps on virtual servers</td></tr>
+          <tr><td>Auto Scaling</td><td>Auto Scaling Groups</td><td>VM Scale Sets</td><td>Auto increase/decrease VMs</td></tr>
+          <tr><td>Containers</td><td>ECS / EKS</td><td>AKS</td><td>Run containerized apps</td></tr>
+          <tr><td>Serverless</td><td>AWS Lambda</td><td>Azure Functions</td><td>Run code without managing servers</td></tr>
+          <tr><td>Object Storage</td><td>S3</td><td>Blob Storage</td><td>Store images, videos, backups</td></tr>
+          <tr><td>Block Storage</td><td>EBS</td><td>Managed Disks</td><td>Attach storage to VMs</td></tr>
+          <tr><td>File Storage</td><td>EFS</td><td>Azure Files</td><td>Shared file system</td></tr>
+          <tr><td>Relational DB</td><td>RDS</td><td>Azure SQL Database</td><td>Managed SQL databases</td></tr>
+          <tr><td>NoSQL DB</td><td>DynamoDB</td><td>Cosmos DB</td><td>High-scale NoSQL data</td></tr>
+          <tr><td>Networking</td><td>VPC</td><td>VNet</td><td>Private cloud network</td></tr>
+          <tr><td>Load Balancer</td><td>ELB / ALB</td><td>Azure Load Balancer / App Gateway</td><td>Distribute traffic</td></tr>
+          <tr><td>DNS</td><td>Route 53</td><td>Azure DNS</td><td>Domain name management</td></tr>
+          <tr><td>Identity</td><td>IAM</td><td>Azure AD (Entra ID)</td><td>Users, roles, permissions</td></tr>
+          <tr><td>Monitoring</td><td>CloudWatch</td><td>Azure Monitor</td><td>Logs &amp; metrics</td></tr>
+          <tr><td>CI/CD</td><td>CodePipeline / CodeBuild</td><td>Azure DevOps</td><td>Build &amp; deploy apps</td></tr>
+          <tr><td>Messaging</td><td>SQS / SNS</td><td>Service Bus</td><td>Queue &amp; notifications</td></tr>
+          <tr><td>CDN</td><td>CloudFront</td><td>Azure CDN</td><td>Faster content delivery</td></tr>
+          <tr><td>IaC</td><td>CloudFormation</td><td>ARM Templates / Bicep</td><td>Infrastructure as Code</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- AWS Key concepts from notes -->
+  <div class="section-header">
+    <div class="section-title" style="font-size:1.4rem; color:#ff9900">AWS Key Concepts</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;margin-bottom:2rem">
+    <div class="interview-card">
+      <div class="interview-q">What is EC2?</div>
+      <div class="interview-a">EC2 (Elastic Compute Cloud) is an AWS service to create <strong>virtual machines in the cloud</strong>. VMs act like real servers — install OS, runtime, app code. Commonly used to <strong>host dynamic websites</strong> running backend apps like Node.js, Python, Java.</div>
+      <div class="oneliner">EC2 provides virtual machines in the cloud and is commonly used to host dynamic websites by running backend applications and server-side logic.</div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-q">What is EBS and EBS Snapshot?</div>
+      <div class="interview-a"><strong>EBS volumes</strong> are virtual cloud disks that provide persistent storage for EC2 instances and can be backed up using snapshots.<br><br>An <strong>EBS Snapshot</strong> is a point-in-time backup of an EBS volume — incremental, durable, and can be copied across regions for disaster recovery.</div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-q">Public vs Private Subnets</div>
+      <div class="interview-a">
+        <strong>Public subnet</strong> → inbound + outbound (IGW) — for apps reachable by users<br>
+        <strong>Private subnet</strong> → outbound only (NAT) — for deployment and backend processing<br>
+        <strong>Database</strong> → no internet at all (most secure)
+      </div>
+      <div class="oneliner">Public subnets provide internet access mainly for application availability to users, while deployment and backend processing are usually handled in private subnets.</div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-q">Final Project: EBS Snapshot Automation</div>
+      <div class="interview-a">Designed an automated solution to manage and delete <strong>stale EBS snapshots</strong> in AWS for cloud cost optimization. Used <strong>AWS Lambda + Python + Boto3</strong> to connect to EC2 APIs, identify orphaned snapshots, and delete them automatically. Used <strong>IAM roles</strong> for secure access without exposing credentials.</div>
+      <div class="oneliner">Lambda function deletes snapshots not linked to any volume, whose volumes are detached, or whose volumes are deleted. Secure via IAM roles. Efficient via serverless execution.</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="copy-toast" id="copyToast">✓ Copied to clipboard!</div>
+
+<script src="script.js"></script>
+</body>
+</html>
