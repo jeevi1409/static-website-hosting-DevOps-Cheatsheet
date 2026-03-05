@@ -68,6 +68,7 @@ Added a bucket policy to allow public read access:
     }
   ]
 }
+
 6️⃣ Accessed Website via S3 Endpoint
 
 After configuration, AWS generated a website endpoint like:
