@@ -50,11 +50,7 @@ Opened bucket → Properties
 
 Enabled Static Website Hosting
 
-Set:
-
 Index document → index.html
-
-Error document → index.html (or error.html)
 
 5️⃣ Added Bucket Policy
 
